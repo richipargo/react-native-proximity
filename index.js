@@ -83,10 +83,14 @@ export const proximityObserver = {
       `Enter`,
       event => {
         // $FlowFixMe
-        const onEnterAction = zonesById.get(event.zoneId).onEnterAction;
-        if (typeof onEnterAction === "function") {
-          const context = ProximityContext.fromJSON(event.context);
-          onEnterAction(context);
+        const zone = zonesById.get(event.zoneId);
+        if(zone){
+          const onEnterAction = zone.onEnterAction;
+          
+          if (typeof onEnterAction === "function") {
+            const context = ProximityContext.fromJSON(event.context);
+            onEnterAction(context);
+          }
         }
       }
     );
@@ -95,10 +99,14 @@ export const proximityObserver = {
       `Exit`,
       event => {
         // $FlowFixMe
-        const onExitAction = zonesById.get(event.zoneId).onExitAction;
-        if (typeof onExitAction === "function") {
-          const context = ProximityContext.fromJSON(event.context);
-          onExitAction(context);
+        const zone = zonesById.get(event.zoneId);
+        if(zone){
+          const onExitAction = zone.onExitAction;
+          
+          if (typeof onExitAction === "function") {
+            const context = ProximityContext.fromJSON(event.context);
+            onExitAction(context);
+          }
         }
       }
     );
@@ -107,12 +115,15 @@ export const proximityObserver = {
       `Change`,
       event => {
         // $FlowFixMe
-        const onChangeAction = zonesById.get(event.zoneId).onChangeAction;
-        if (typeof onChangeAction === "function") {
-          const contexts = event.contexts.map(context =>
-            ProximityContext.fromJSON(context)
-          );
-          onChangeAction(contexts);
+        const zone = zonesById.get(event.zoneId);
+        if(zone){
+          const onChangeAction = zone.onChangeAction;
+          if (typeof onChangeAction === "function") {
+            const contexts = event.contexts.map(context =>
+              ProximityContext.fromJSON(context)
+            );
+            onChangeAction(contexts);
+          }
         }
       }
     );
