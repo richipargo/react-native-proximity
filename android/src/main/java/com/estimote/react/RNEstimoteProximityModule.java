@@ -61,6 +61,8 @@ public class RNEstimoteProximityModule extends ReactContextBaseJavaModule {
 
         ProximityObserverBuilder builder = new ProximityObserverBuilder(reactContext, credentials)
                 .withBalancedPowerMode()
+                .withEstimoteSecureMonitoringDisabled()
+                .withTelemetryReportingDisabled()
                 .onError(new Function1<Throwable, Unit>() {
                     @Override
                     public Unit invoke(Throwable throwable) {
